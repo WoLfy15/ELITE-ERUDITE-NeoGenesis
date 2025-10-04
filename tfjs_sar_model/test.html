@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>SAR CNN Model Predict (TIFF Support)</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.2.0/dist/tf.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/tiff.js/tiff.min.js"></script>
+    <style>
+        body { font-family: sans-serif; line-height: 1.6; padding: 20px; }
+        #prediction-result { margin-top: 15px; padding: 10px; border: 1px solid #ddd; border-radius: 5px; }
+        pre { background-color: #f4f4f4; padding: 10px; border-radius: 3px; }
+    </style>
+</head>
+<body>
+    <h1>SAR CNN Prediction (2-Channel Input)</h1>
+
+    <input type="file" id="image-upload" accept="image/jpeg, image/png, image/tiff">
+
+    <img id="input-image" style="max-width: 256px; max-height: 256px; display: none; margin-top: 10px;">
+
+    <canvas id="tiff-canvas" style="display: none;"></canvas>
+
+    <button id="predict-button" disabled>Run Prediction (Loading...)</button>
+
+    <div id="status" style="margin-top: 15px;">Waiting for model to load...</div>
+    <div id="prediction-result"></div>
+
+    <script>
+        // --- Configuration ---
+        const MODEL_URL = './model.json';
+        const TARGET_SIZE = 256;
+        let model = null;
+        let isModelLoaded = false;
+        let isImageLoaded = false;
+        // This will hold the element (img or canvas) that contains the image data
+        let imageSourceElement = null;
+
+        // --- Core Functions (loadModel, updatePredictButton are unchanged) ---
+        async function loadModel() {
+            try {
+                const statusElement = document.getElementById('status');
+                statusElement.innerText = 'Loading model...';
+                model = await tf.loadLayersModel(MODEL_URL);
+                isModelLoaded = true;
+                statusElement.innerText = 'Model loaded successfully.';
+                updatePredictButton();
+                console.log('Model Summary:', model.summary());
+            } catch (error) {
+                console.error('Error loading model:', error);
+                document.getElementById('status').innerText = 'ERROR: Failed to load model. Check console for path/CORS error.';
+            }
+        }
+        function updatePredictButton() {
+            const button = document.getElementById('predict-button');
+            if (isModelLoaded && isImageLoaded) {
+                button.disabled = false;
+                button.innerText = 'Run Prediction';
+                document.getElementById('status').innerText = 'Model & Image ready. Click Run Prediction.';
+            } else {
+                button.disabled = true;
+            }
+        }
+
+        // --- Image Preprocessing (Unchanged logic, works on both <img> and <canvas>) ---
+        function preprocessImage(sourceElement) {
+            return tf.tidy(() => {
+                let tensor = tf.browser.fromPixels(sourceElement);
+                tensor = tf.image.resizeBilinear(tensor, [TARGET_SIZE, TARGET_SIZE]);
+                let grayscale_tensor = tensor.mean(2, true);
+                let two_channel_tensor = tf.concat([grayscale_tensor, grayscale_tensor], 2);
+                two_channel_tensor = two_channel_tensor.div(255.0);
+                const input_tensor = two_channel_tensor.expandDims(0);
+                return input_tensor;
+            });
+        }
+
+        // --- Prediction Function (Now uses the generic imageSourceElement) ---
+        async function runPrediction() {
+            if (!model || !isImageLoaded || !imageSourceElement) {
+                document.getElementById('status').innerText = 'Error: Model or image not ready.';
+                return;
+            }
+
+            document.getElementById('status').innerText = 'Preprocessing image and predicting...';
+            const button = document.getElementById('predict-button');
+            button.disabled = true;
+            button.innerText = 'Predicting...';
+
+            try {
+                const inputTensor = preprocessImage(imageSourceElement);
+                const prediction = model.predict(inputTensor);
+                const outputArray = await prediction.data();
+
+                const classLabels = ['No Flood', 'Flood'];
+                const maxIndex = outputArray.indexOf(Math.max(...outputArray));
+                const predictedClass = classLabels[maxIndex];
+                const confidence = (outputArray[maxIndex] * 100).toFixed(2);
+
+                document.getElementById('status').innerText = 'Prediction complete.';
+                document.getElementById('prediction-result').innerHTML = `
+                    <p style="font-size: 1.2em;"><b>Prediction: ${predictedClass}</b></p>
+                    <p>Confidence: ${confidence}%</p><hr>
+                    <p>Raw Output:</p><pre>${outputArray.join(', ')}</pre>
+                `;
+
+                inputTensor.dispose();
+                prediction.dispose();
+            } catch (e) {
+                document.getElementById('status').innerText = 'ERROR during prediction. Check console.';
+                console.error('Prediction error:', e);
+            }
+
+            button.disabled = false;
+            button.innerText = 'Run Prediction';
+        }
+
+        // --- Event Listeners and Initialization ---
+
+        // UPDATED: Event listener now handles JPG, PNG, and TIFF files
+        document.getElementById('image-upload').addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            const imgElement = document.getElementById('input-image');
+            const canvasElement = document.getElementById('tiff-canvas');
+            const reader = new FileReader();
+
+            // Reset state
+            isImageLoaded = false;
+            imgElement.style.display = 'none';
+            document.getElementById('prediction-result').innerHTML = '';
+            updatePredictButton();
+
+            // --- TIFF File Handling ---
+            if (file.type === 'image/tiff') {
+                reader.onload = function(e) {
+                    const buffer = e.target.result;
+                    const tiff = new Tiff({ buffer: buffer });
+                    const width = tiff.width();
+                    const height = tiff.height();
+                    const tiffCanvas = tiff.toCanvas(); // tiff.js creates its own canvas
+
+                    // Display the TIFF on the visible <img> tag for user feedback
+                    imgElement.src = tiffCanvas.toDataURL();
+                    imgElement.style.display = 'block';
+
+                    // Set the hidden canvas as the source for TF.js
+                    imageSourceElement = tiffCanvas;
+                    isImageLoaded = true;
+                    updatePredictButton();
+                };
+                reader.readAsArrayBuffer(file);
+
+            // --- JPG/PNG File Handling (standard) ---
+            } else {
+                reader.onload = function(e) {
+                    imgElement.src = e.target.result;
+                    imgElement.style.display = 'block';
+                    imageSourceElement = imgElement; // The img tag is the source
+                    isImageLoaded = true;
+                    updatePredictButton();
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        document.getElementById('predict-button').addEventListener('click', runPrediction);
+        loadModel();
+    </script>
+</body>
+</html>
