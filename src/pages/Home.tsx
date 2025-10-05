@@ -1,12 +1,16 @@
 import { useEffect, useRef, useState, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Satellite, Eye, Zap, Globe, Waves, Mountain, ChevronLeft, ChevronRight, ChevronUp, ChevronDown } from 'lucide-react';
+import { Satellite, Eye, Zap, Globe, Waves, Mountain, ChevronLeft, ChevronRight, ChevronUp, ChevronDown, Play } from 'lucide-react';
 import { image } from 'framer-motion/client';
 
 const Home = () => {
   const sarRef = useRef<HTMLElement>(null);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [[page, direction], setPage] = useState([0, 0]);
+
+  // YouTube Video Configuration - Replace with your YouTube video ID
+  const youtubeVideoId = "6A-JtU6abw0"; // Replace with actual YouTube video ID
+  const youtubeEmbedUrl = `https://www.youtube.com/embed/6A-JtU6abw0?si=jYcTWtYu_Nxz2XGl`;
 
   // SAR Images data - you can replace these URLs with your actual images
   const sarImages = [
@@ -221,7 +225,7 @@ const Home = () => {
       </motion.section>
 
       {/* What is SAR Section */}
-      <section className="py-20 px-4 bg-gradient-to-b from-slate-900 via-blue-900 to-slate-800 relative overflow-hidden">
+      <section className="py-20 px-4 bg-gradient-to-b from-slate-900 via-blue-900 to-indigo-900 relative overflow-hidden">
         <AnimatedDots color="green" opacity={0.15} size={3} />
         <div className="max-w-7xl mx-auto relative z-10">
           <motion.div
@@ -362,6 +366,85 @@ const Home = () => {
               </motion.div>
             </motion.div>
           </div>
+        </div>
+      </section>
+
+      {/* OUR PROJECT Section - YouTube Video */}
+      <section className="py-20 px-4 bg-gradient-to-b from-indigo-900 via-purple-900 to-slate-800 relative overflow-hidden">
+        <AnimatedDots color="green" opacity={0.15} size={3} />
+        <div className="max-w-7xl mx-auto relative z-10">
+          <motion.div
+            initial={{ y: 50, opacity: 0 }}
+            whileInView={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
+              OUR PROJECT
+            </h2>
+            <div className="w-24 h-1 bg-gradient-to-r from-cyan-400 to-blue-400 rounded-full mx-auto mb-8"></div>
+            <p className="text-xl text-gray-300 max-w-4xl mx-auto">
+              Watch our comprehensive overview of SAR technology and its revolutionary applications 
+              in Earth observation and environmental monitoring
+            </p>
+          </motion.div>
+
+          {/* YouTube Video Frame */}
+          <motion.div
+            initial={{ y: 50, opacity: 0, scale: 0.9 }}
+            whileInView={{ y: 0, opacity: 1, scale: 1 }}
+            whileHover={{ scale: 1.02, y: -10 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            viewport={{ once: true }}
+            className="relative overflow-hidden rounded-3xl shadow-2xl max-w-5xl mx-auto"
+          >
+            <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/20 to-blue-600/20 rounded-3xl"></div>
+            <div className="relative bg-gradient-to-br from-cyan-500/10 to-blue-600/10 backdrop-blur-sm border border-white/20 rounded-3xl p-6 hover:bg-white/10 hover:border-white/30 transition-all duration-500">
+              
+              {/* YouTube Video Container */}
+              <motion.div
+                initial={{ scale: 0.95, opacity: 0 }}
+                whileInView={{ scale: 1, opacity: 1 }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+                viewport={{ once: true }}
+                className="relative aspect-video rounded-2xl overflow-hidden bg-black/20 backdrop-blur-sm border border-white/10"
+              >
+                {/* YouTube Embed iframe */}
+                {youtubeVideoId && youtubeVideoId !== "YOUR_YOUTUBE_VIDEO_ID_HERE" ? (
+                  <iframe
+                    className="w-full h-full rounded-2xl"
+                    src={youtubeEmbedUrl}
+                    title="SAR Technology Overview"
+                    frameBorder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowFullScreen
+                  />
+                ) : (
+                  // Placeholder when no video ID is provided
+                  <div className="w-full h-full bg-gradient-to-br from-slate-900/50 to-blue-900/50 flex flex-col items-center justify-center text-center p-8">
+                    <Play className="w-16 h-16 text-white/60 mb-4" />
+                    <h3 className="text-2xl font-bold text-white mb-4">Video Coming Soon</h3>
+                    <p className="text-gray-300 mb-6 max-w-md">
+                      Replace the YouTube video ID in the code to display your SAR project video here.
+                    </p>
+                    <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg p-4 max-w-md">
+                      <p className="text-sm text-gray-300 mb-2">
+                        <strong>Instructions:</strong>
+                      </p>
+                      <p className="text-xs text-gray-400 font-mono">
+                        Find: youtubeVideoId = "YOUR_YOUTUBE_VIDEO_ID_HERE"<br/>
+                        Replace with your actual YouTube video ID
+                      </p>
+                    </div>
+                  </div>
+                )}
+              </motion.div>
+
+              {/* Video Info Section */}
+              
+            </div>
+          </motion.div>
         </div>
       </section>
 

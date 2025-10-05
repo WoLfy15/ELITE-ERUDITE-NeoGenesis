@@ -728,7 +728,7 @@ const Floods = () => {
               className="text-3xl md:text-4xl font-bold text-white mb-8 flex items-center relative z-10"
             >
               <Globe className="w-10 h-10 text-emerald-400 mr-4" />
-              SIKKIM FLOODS OF 2025
+              SIKKIM FLOODS OF 2023
             </motion.h3>
 
             {/* Main content with image slider and text */}
@@ -757,13 +757,13 @@ const Floods = () => {
                       }}
                     >
                       <img
-                        src="/.bolt/assets/notflooded.jpg"
+                        src="/.bolt/assets/snotflooded.jpg"
                         alt="Before Flooding - Normal SAR Image"
                         className="w-full h-full object-cover select-none pointer-events-none"
                         draggable={false}
                       />
                       <div className="absolute top-4 right-4 bg-blue-600/90 text-white px-3 py-1 rounded-full text-sm font-medium">
-                        Before Flood
+                        Not Flooded
                       </div>
                     </div>
                     
@@ -776,13 +776,13 @@ const Floods = () => {
                       }}
                     >
                       <img
-                        src="/.bolt/assets/flooded.jpg"
+                        src="/.bolt/assets/sflooded.jpg"
                         alt="After Flooding - Flood Detection SAR Image"
                         className="w-full h-full object-cover select-none pointer-events-none"
                         draggable={false}
                       />
                       <div className="absolute top-4 left-4 bg-red-600/90 text-white px-3 py-1 rounded-full text-sm font-medium">
-                        After Flood
+                        Flooded
                       </div>
                     </div>
                     
@@ -835,7 +835,13 @@ const Floods = () => {
               >
                 <h4 className="text-2xl font-semibold text-white mb-4">Overview</h4>
                 <p className="text-gray-300 leading-relaxed mb-4">
-                  The Sentinel-1 SAR (Synthetic Aperture Radar) images captured before and after the floods in August 2025 reveal the drastic environmental changes in Sikkim. Unlike optical images, SAR uses microwave radar pulses that bounce off the Earth's surface, allowing monitoring even through clouds and at night—crucial during heavy monsoon conditions.
+                  On 4 October 2023, a Glacial Lake Outburst Flood (GLOF) in South Lhonak Lake caused massive destruction downstream.
+
+SAR data helped detect the breach width (~100 m) and map the flood extent of nearly 80 km along Teesta River.
+
+Enabled early damage assessment and identification of hydropower impact zones and washed-out bridges.
+
+Highlighted the importance of SAR-based early warning and climate-resilient Himalayan monitoring systems.
                 </p>
                 
                 <div className="space-y-4 mb-4">
@@ -855,10 +861,6 @@ const Floods = () => {
                     </p>
                   </div>
                 </div>
-                
-                <p className="text-gray-300 leading-relaxed">
-                  By comparing the SAR images from <span className="text-emerald-300 font-medium">7 August 2025 (before the peak flooding)</span> and <span className="text-red-300 font-medium">11 August 2025 (after the floods)</span>, it is evident that several valleys and riverbeds turned significantly darker, showing expanded water coverage and inundation. The radar imagery thus clearly captures the geomorphological impact of the flood event—river widening, valley inundation, and altered drainage networks.
-                </p>
               </motion.section>
             </div>
 
@@ -1009,9 +1011,11 @@ const Floods = () => {
                       Human & Infrastructure Loss
                     </h5>
                     <ul className="text-gray-300 space-y-2 text-sm">
-                      <li>• Villages near Dharali and Harsil valleys were inundated, forcing evacuations</li>
-                      <li>• Roads, bridges, and hydropower projects along the Bhagirathi sustained severe damage, isolating the region</li>
-                      <li>• Agricultural lands were submerged, and apple orchards—the local economic backbone—suffered heavy losses</li>
+                      <p>On 4 October 2023, a GLOF from South Lhonak Lake struck North Sikkim.
+
+Over 30,000 people were affected and 55 lives were lost.
+
+The Chungthang Hydropower Dam and 15 major bridges were completely destroyed.</p>
                     </ul>
                   </div>
 
@@ -1021,9 +1025,11 @@ const Floods = () => {
                       Geomorphological Changes
                     </h5>
                     <ul className="text-gray-300 space-y-2 text-sm">
-                      <li>• SAR imagery showed widened river channels and significant scouring between 6–12 August</li>
-                      <li>• New sediment deposits and altered terraces reshaped valley floors</li>
-                      <li>• The flood reworked riverbanks, creating unstable sandbars and gravel beds</li>
+                      <p>Nearly 50 million m³ of lake water rushed downstream within hours.
+
+River channels widened and new sediment bars formed along the Teesta Valley.
+
+SAR data showed major erosion and reshaping of floodplains.</p>
                     </ul>
                   </div>
 
@@ -1033,8 +1039,11 @@ const Floods = () => {
                       Landslides and Secondary Hazards
                     </h5>
                     <ul className="text-gray-300 space-y-2 text-sm">
-                      <li>• Saturated slopes triggered frequent landslides, burying farmland and blocking highways</li>
-                      <li>• Temporary river blockages created risks of sudden outburst floods</li>
+                      <p>Continuous rainfall triggered dozens of landslides across steep slopes.
+
+Debris blocked river flow, creating temporary dams and sudden flood surges.
+
+High sediment movement further destabilized surrounding terrain</p>
                     </ul>
                   </div>
                 </div>
@@ -1048,8 +1057,11 @@ const Floods = () => {
                         Hydrological Impacts
                       </h5>
                       <ul className="text-gray-300 space-y-2 text-sm">
-                        <li>• Bhagirathi River experienced altered flow dynamics with elevated sediment load and turbidity</li>
-                        <li>• Aquifers faced recharge disruptions due to deposition of impermeable silt</li>
+                        <p>Teesta River level rose abruptly by 15–20 feet, flooding entire settlements.
+
+Major roads and bridges were submerged, isolating key regions.
+
+Drainage systems and river morphology were severely altered.</p>
                       </ul>
                     </div>
 
@@ -1059,8 +1071,11 @@ const Floods = () => {
                         Biodiversity Stress
                       </h5>
                       <ul className="text-gray-300 space-y-2 text-sm">
-                        <li>• Riparian vegetation was uprooted, reducing habitat stability for fish and aquatic fauna</li>
-                        <li>• Wildlife corridors were fragmented as floodplains and forest edges eroded</li>
+                        <p>Riparian forests and aquatic habitats were eroded and fragmented.
+
+Fish, amphibians, and small mammals were displaced from flood zones.
+
+Ecological corridors in the Teesta basin were severely disturbed.</p>
                       </ul>
                     </div>
                   </div>
@@ -1072,8 +1087,12 @@ const Floods = () => {
                         Soil and Agriculture
                       </h5>
                       <ul className="text-gray-300 space-y-2 text-sm">
-                        <li>• Productive topsoil was stripped away, while farmlands were layered with coarse sediment</li>
-                        <li>• Cash crops like apples, rajma (kidney beans), and millets sustained long-term damage</li>
+                       <p>Over 200 hectares of farmland were buried under thick silt and debris.
+
+Fertile topsoil was washed away, reducing crop yield for several seasons.
+
+Livelihoods dependent on farming faced long-term disruption.
+</p>
                       </ul>
                     </div>
 
@@ -1083,8 +1102,11 @@ const Floods = () => {
                         Climatic Feedback Loops
                       </h5>
                       <ul className="text-gray-300 space-y-2 text-sm">
-                        <li>• Increased soil erosion released stored carbon, reducing natural carbon sinks</li>
-                        <li>• Loss of vegetation heightened the vulnerability of local ecosystems to future climate extremes</li>
+                        <p>Accelerated glacial retreat and permafrost thaw weakened moraine stability.
+
+Vegetation loss increased erosion and reduced natural flood buffering.
+
+Future GLOF and rainfall risks are expected to intensify under warming trends.</p>
                       </ul>
                     </div>
                   </div>
@@ -1208,13 +1230,13 @@ const Floods = () => {
                       }}
                     >
                       <img
-                        src="/.bolt/assets/dharaliflood.jpg"
+                        src="/.bolt/assets/dnotflooded.jpg"
                         alt="Before Flooding - Normal SAR Image"
                         className="w-full h-full object-cover select-none pointer-events-none"
                         draggable={false}
                       />
                       <div className="absolute top-4 right-4 bg-blue-600/90 text-white px-3 py-1 rounded-full text-sm font-medium">
-                        Flooded
+                       Not Flooded
                       </div>
                     </div>
                     
@@ -1227,13 +1249,13 @@ const Floods = () => {
                       }}
                     >
                       <img
-                        src="/.bolt/assets/dharaliafterflood.jpg"
+                        src="/.bolt/assets/dflooded.jpg"
                         alt="After Flooding - Flood Detection SAR Image"
                         className="w-full h-full object-cover select-none pointer-events-none"
                         draggable={false}
                       />
                       <div className="absolute top-4 left-4 bg-red-600/90 text-white px-3 py-1 rounded-full text-sm font-medium">
-                        After Flood
+                      Flooded
                       </div>
                     </div>
                     
@@ -1286,7 +1308,13 @@ const Floods = () => {
               >
                 <h4 className="text-2xl font-semibold text-white mb-4">Overview</h4>
                 <p className="text-gray-300 leading-relaxed mb-4">
-                  The Sentinel-1 SAR (Synthetic Aperture Radar) images acquired before and after the Dharali flash floods in Uttarakhand (August 2025) reveal the severe transformation of the river valleys and surrounding landscapes. Unlike optical imagery, SAR uses microwave signals, making it possible to monitor Earth's surface through thick monsoon clouds and during nighttime—an essential advantage for assessing disasters triggered during extreme weather.
+                  On 6 August 2025, intense rainfall triggered flash floods and landslides in the Dharali region of Uttarakhand.
+
+SAR imagery revealed rapid terrain changes, including riverbank erosion up to 200 m in some zones.
+
+Mapped sediment deposition, damaged road networks, and landslide-prone slopes for disaster response.
+
+Proved the value of real-time SAR monitoring and sustainable watershed management for Himalayan safety.
                 </p>
                 
                 <div className="space-y-4 mb-4">
@@ -1353,14 +1381,9 @@ const Floods = () => {
                         Extreme Monsoon Rainfall
                       </h5>
                       <ul className="text-gray-300 space-y-2 text-sm">
-                        <li className="flex items-start">
-                          <span className="w-2 h-2 bg-blue-400 rounded-full mr-3 mt-2 flex-shrink-0"></span>
-                          Unusually heavy rainfall events linked to monsoon intensification dumped large volumes of water within a short span
-                        </li>
-                        <li className="flex items-start">
-                          <span className="w-2 h-2 bg-blue-400 rounded-full mr-3 mt-2 flex-shrink-0"></span>
-                          Orographic uplift against the steep Himalayan slopes concentrated rainfall over the upper catchments of the Bhagirathi and its tributaries
-                        </li>
+                       <p>Intensified Indian monsoon system linked to regional climate warming.
+
+Orographic lifting produced cloudbursts over steep Uttarkashi slopes.</p>
                       </ul>
                     </div>
 
@@ -1370,14 +1393,9 @@ const Floods = () => {
                         Glacial and Snowmelt Contribution
                       </h5>
                       <ul className="text-gray-300 space-y-2 text-sm">
-                        <li className="flex items-start">
-                          <span className="w-2 h-2 bg-cyan-400 rounded-full mr-3 mt-2 flex-shrink-0"></span>
-                          High summer temperatures enhanced glacial meltwater discharge into rivers
-                        </li>
-                        <li className="flex items-start">
-                          <span className="w-2 h-2 bg-cyan-400 rounded-full mr-3 mt-2 flex-shrink-0"></span>
-                          The sudden combination of snowmelt and intense rain amplified flood peaks downstream
-                        </li>
+                        <p>Melting glaciers near Dharali triggered partial breach of moraine-dammed lakes.
+
+Floodwaters expanded valley channels and eroded riverbanks.</p>
                       </ul>
                     </div>
                   </div>
@@ -1389,14 +1407,9 @@ const Floods = () => {
                         Fragile Himalayan Terrain
                       </h5>
                       <ul className="text-gray-300 space-y-2 text-sm">
-                        <li className="flex items-start">
-                          <span className="w-2 h-2 bg-red-400 rounded-full mr-3 mt-2 flex-shrink-0"></span>
-                          The young and tectonically active geology of Uttarakhand makes slopes inherently unstable
-                        </li>
-                        <li className="flex items-start">
-                          <span className="w-2 h-2 bg-red-400 rounded-full mr-3 mt-2 flex-shrink-0"></span>
-                          Saturated soils and undercut riverbanks collapsed, triggering landslides that blocked streams and later burst as secondary surges
-                        </li>
+                        <p>Unstable Himalayan geology made the Bhagirathi valley prone to landslides.
+
+Massive slope failure and debris flow added sediment to river networks.</p>
                       </ul>
                     </div>
 
@@ -1406,14 +1419,9 @@ const Floods = () => {
                         Anthropogenic Stress
                       </h5>
                       <ul className="text-gray-300 space-y-2 text-sm">
-                        <li className="flex items-start">
-                          <span className="w-2 h-2 bg-orange-400 rounded-full mr-3 mt-2 flex-shrink-0"></span>
-                          Road expansion and hydropower development along the Bhagirathi altered drainage channels and destabilized slopes
-                        </li>
-                        <li className="flex items-start">
-                          <span className="w-2 h-2 bg-orange-400 rounded-full mr-3 mt-2 flex-shrink-0"></span>
-                          Deforestation and slope cutting reduced natural water absorption, accelerating flash flood impacts
-                        </li>
+                       <p>Hydropower tunneling and road cutting altered natural drainage patterns.
+
+Deforestation and slope modification weakened catchment stability.</p>
                       </ul>
                     </div>
                   </div>
