@@ -513,76 +513,8 @@ const WildFires = () => {
                 </div>
               </motion.div>
 
-              <motion.div
-                variants={cardVariants}
-                whileHover={{ scale: 1.01 }}
-                transition={{ duration: 0.2 }}
-                className="bg-gradient-to-br from-amber-900/30 to-orange-800/25 backdrop-blur-sm border border-amber-500/40 rounded-3xl p-8 mb-8 shadow-xl"
-              >
-                <div className="flex items-center justify-center mb-4">
-                  <Leaf className="w-8 h-8 text-amber-400 mr-3" />
-                  <h3 className="text-xl font-bold text-amber-400">Imapct on Different Types of Vegetation</h3>
-                </div>
-                <p className="text-xl text-gray-200 leading-relaxed text-center">
-                  To study how different kinds of vegetation were affected we plotted a map using ESA WorldCover that shows different types of vegetation in different area and masked it with burnt area map. It helped us make a map to visualize different vegetation burnt in different regions of fire. From the map we can conclude that majorly trees, shrubland and grassland were burnt.
-                </p>
-                <div className="mt-6 h-1 bg-gradient-to-r from-amber-500 to-orange-500 rounded-full mx-auto w-1/2"></div>
-              </motion.div>
-
               {/* Vegetation Map */}
-              <motion.div 
-                variants={itemVariants} 
-                className="relative"
-                initial={{ scale: 0.95, opacity: 0 }}
-                whileInView={{ scale: 1, opacity: 1 }}
-                transition={{ duration: 0.8 }}
-                viewport={{ once: true }}
-              >
-                <div className="flex justify-center gap-8">
-                  <div className="flex-1 max-w-4xl">
-                    <div className="bg-gradient-to-r from-amber-900/20 to-orange-800/30 backdrop-blur-sm border border-amber-500/30 rounded-3xl p-6 shadow-2xl">
-                      <iframe
-                        src="/.bolt/assets/sar_vegetation_map-2.html"
-                        title="Vegetation Affected by Fire Map"
-                        width="100%"
-                        height="500"
-                        style={{ maxWidth: '100%', border: 'none', borderRadius: '16px' }}
-                        allowFullScreen
-                      />
-                    </div>
-                  </div>
-                  
-                  {/* Vegetation Palette */}
-                  <motion.div
-                    variants={cardVariants}
-                    whileHover={{ scale: 1.01 }}
-                    transition={{ duration: 0.2 }}
-                    className="bg-gradient-to-b from-amber-900/40 to-orange-800/60 backdrop-blur-md border border-amber-500/40 rounded-xl p-4 w-64 h-fit shadow-xl"
-                  >
-                    <h3 className="text-sm font-bold text-white mb-3 text-center">Vegetation Types</h3>
-                    <div className="space-y-2">
-                      {[
-                        { color: '#004000', label: 'Trees' },
-                        { color: '#ffbb22', label: 'Shrubland' },
-                        { color: '#ff0000', label: 'Grassland' },
-                        { color: '#f096ff', label: 'Cropland' },
-                        { color: '#ffff00', label: 'Built-up' },
-                        { color: '#b4b4b4', label: 'Barren / sparse vegetation' },
-                        { color: '#f0f0f0', label: 'Snow and ice' },
-                        { color: '#0064c8', label: 'Open water' },
-                        { color: '#0096a0', label: 'Herbaceous wetland' },
-                        { color: '#00cf75', label: 'Mangroves' },
-                        { color: '#fae6a0', label: 'Moss and lichen' }
-                      ].map((item, index) => (
-                        <div key={index} className="flex items-center space-x-2 hover:bg-white/10 rounded p-1 transition-colors">
-                          <div className="w-4 h-4 rounded-sm border border-gray-300" style={{ backgroundColor: item.color }}></div>
-                          <span className="text-gray-200 text-xs font-medium">{item.label}</span>
-                        </div>
-                      ))}
-                    </div>
-                  </motion.div>
-                </div>
-              </motion.div>
+              
             </motion.div>
           </div>
         </motion.div>
